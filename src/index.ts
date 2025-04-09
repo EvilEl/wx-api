@@ -1,6 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import morgan from 'morgan'
+import cors from 'cors'
 
 import { init } from "./db/db";
 import { createTable } from "./db/dbCreateTable";
@@ -9,6 +10,7 @@ import routerDiffuser from "./router/diffuser";
 import routerCandle from "./router/candle";
 
 const app = express();
+app.use(cors()) // ✅ разрешает все источники
 app.use(morgan('dev')); // простой логгер
 app.use(express.json()); // Middleware для парсинга JSON
 app.use(routerSachet);

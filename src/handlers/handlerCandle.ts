@@ -6,7 +6,8 @@ import {
   IProduct,
 } from "../models/Product";
 import serviceCandle from "../service/serviceCandle";
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
+
 
 async function createCandle(
   req: Request<{}, {}, ProductWithoutId>,
@@ -14,19 +15,31 @@ async function createCandle(
 ) {
   try {
     const { name, count, price } = req.body;
+    if (!name || !count || !price) {
+      res.status(HttpStatus.BAD_REQUEST).json('Не заполенны поля')
+      return
+    }
     await serviceCandle.createCandle({ name, count, price });
-    res.status(200).json();
+    res.status(HttpStatus.CREATED).send('Успех');
   } catch (err) {
     if (err instanceof Error) {
       if (err.message.includes("UNIQUE")) {
-        res.status(HttpStatus.CONFLICT);
+        res.status(HttpStatus.CONFLICT).json({
+          message: 'Конфликт: уже существует'
+        });
+        return
       }
-      res.json({ message: err.message });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+        message: err.message
+      });
+      return
     }
-    res.json({ message: "Ошибка" });
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+      message: 'Неизвестная ошибка'
+    });
+    return
   }
-}
-
+};
 async function removeCandle(req: Request<{ id: ProductId }>, res: Response) {
   const { id } = req.params;
   try {

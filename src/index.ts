@@ -1,5 +1,7 @@
 import "dotenv/config";
 import express from "express";
+import morgan from 'morgan'
+
 import { init } from "./db/db";
 import { createTable } from "./db/dbCreateTable";
 import routerSachet from "./router/sachet";
@@ -7,9 +9,8 @@ import routerDiffuser from "./router/diffuser";
 import routerCandle from "./router/candle";
 
 const app = express();
-
+app.use(morgan('dev')); // простой логгер
 app.use(express.json()); // Middleware для парсинга JSON
-
 app.use(routerSachet);
 app.use(routerDiffuser);
 app.use(routerCandle);

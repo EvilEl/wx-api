@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    /* Type Checking */
+    "strict": true,
+    "noImplicitAny": true, // не явно задавать any
+    "outDir": "./dist", //выходные файлы
+    "esModuleInterop": true,
+    "types": ["node", "@types/express"]
+  },
+
+  /* Type Acquisition */
+  // Отключает автоматическое получение типа в проектах JavaScript:
+  "typeAcquisition": {
+    "enable": false
+  },
+
+  // Для поиска файлов ts.
+  "include": ["./src"], // какие файлы включить
+  "exclude": [""] // какие файлы исключить
+}

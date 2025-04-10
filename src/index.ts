@@ -6,9 +6,9 @@ import swaggerUi from 'swagger-ui-express'
 
 import { init } from "./db/db";
 import { createTable } from "./db/dbCreateTable";
-import routerSachet from "./router/sachet";
-import routerDiffuser from "./router/diffuser";
-import routerCandle from "./router/candle";
+import routerSachet from "./routes/sachet";
+import routerDiffuser from "./routes/diffuser";
+import routerCandle from "./routes/candle";
 import openapiSpecification from './swagger'
 
 const app = express();

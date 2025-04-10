@@ -24,6 +24,36 @@ import swaggerJsdoc from 'swagger-jsdoc'
  *           name: 'Candle'
  *           count: 20
  *           price: 20
+ *     CandleCreate:
+ *       type: object
+ *       required:
+ *         - name
+ *         - count
+ *         - price
+ *       properties:
+ *         name:
+ *           type: string
+ *         count:
+ *           type: number
+ *         price:
+ *           type: number
+ *       example:
+ *         name: 'Candle'
+ *         count: 5
+ *         price: 100
+ *     CandleUpdate:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *         count:
+ *           type: number
+ *         price:
+ *           type: number
+ *       example:
+ *         name: 'Candle'
+ *         count: 5
+ *         price: 100
  *
  * @swagger
  *  tags:

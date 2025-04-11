@@ -105,11 +105,61 @@ import swaggerJsdoc from 'swagger-jsdoc'
  *         name: 'Diffuser'
  *         count: 5
  *         price: 100
+ *     Sachet:
+ *       type: object
+ *       required:
+ *         - id
+ *         - name
+ *         - count
+ *         - price
+ *       properties:
+ *           id:
+ *            type: number
+ *           name:
+ *            type: string
+ *           count:
+ *            type: number
+ *           price:
+ *            type: number
+ *       example:
+ *           id:   1
+ *           name: 'Sachet'
+ *           count: 20
+ *           price: 20
+*     SachetCreate:
+ *       type: object
+ *       required:
+ *         - name
+ *         - count
+ *         - price
+ *       properties:
+ *         name:
+ *           type: string
+ *         count:
+ *           type: number
+ *         price:
+ *           type: number
+ *       example:
+ *         name: 'Sachet'
+ *         count: 5
+ *         price: 100
+ *     SachetUpdate:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *         count:
+ *           type: number
+ *         price:
+ *           type: number
+ *       example:
+ *         name: 'Sachet'
+ *         count: 5
+ *         price: 100
  * @swagger
  *  tags:
  *    name: Candles
  */
-
 
 const options = {
   definition: {

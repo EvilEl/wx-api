@@ -58,7 +58,7 @@ async function updateSachet(
   }
 }
 
-async function getSachet(_req: Request, res: Response) {
+async function getSachets(_req: Request, res: Response) {
   try {
     const data = await serviceSachet.getSachets();
     res.status(200).json(data);
@@ -69,4 +69,16 @@ async function getSachet(_req: Request, res: Response) {
   }
 }
 
-export default { createSachet, removeSachet, updateSachet, getSachet };
+async function getSachet(req: Request<{ id: ProductId }>, res: Response) {
+  try {
+    const { id } = req.params
+    const data = await serviceSachet.getSachet(id);
+    res.status(200).json(data);
+  } catch (err) {
+    if (err instanceof Error) {
+      res.json({ message: err.message });
+    }
+  }
+}
+
+export default { createSachet, removeSachet, updateSachet, getSachets, getSachet };

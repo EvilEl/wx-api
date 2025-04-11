@@ -24,4 +24,8 @@ async function getSachets() {
   return dbSachet.getSachets();
 }
 
-export default { createSachet, removeSachet, updateSachet, getSachets };
+async function getSachet(id: ProductId) {
+  return dbSachet.getSachet(id);
+}
+
+export default { createSachet, removeSachet, updateSachet, getSachets, getSachet };

@@ -1,6 +1,6 @@
 import { PartialProductWithoutId, ProductId } from "../models/Product";
 import { createUpdateParams } from "../utils/formattedUpdateParams";
-import { run, all } from "./db";
+import { run, all, get } from "./db";
 
 async function createSachet(...params: unknown[]) {
   return run(
@@ -35,4 +35,10 @@ async function getSachets() {
   `);
 }
 
-export default { createSachet, removeSachet, updateSachet, getSachets };
+async function getSachet(id: ProductId) {
+  const sql = 'SELECT * FROM sachets WHERE id = ?'
+  return get(sql, id)
+}
+
+
+export default { createSachet, removeSachet, updateSachet, getSachets, getSachet };

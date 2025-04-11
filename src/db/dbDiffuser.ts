@@ -1,6 +1,6 @@
 import { PartialProductWithoutId, ProductId } from "../models/Product";
 import { createUpdateParams } from "../utils/formattedUpdateParams";
-import { run, all } from "./db";
+import { run, all, get } from "./db";
 
 async function createDiffuser(...params: unknown[]) {
   return run(
@@ -35,4 +35,10 @@ async function getDiffusers() {
   `);
 }
 
-export default { createDiffuser, removeDiffuser, updateDiffuser, getDiffusers };
+async function getDiffuser(id: ProductId) {
+  const sql = 'SELECT * FROM diffusers WHERE id = ?'
+  return get(sql, id);
+}
+
+getDiffuser
+export default { createDiffuser, removeDiffuser, updateDiffuser, getDiffusers, getDiffuser };

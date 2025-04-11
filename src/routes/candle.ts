@@ -83,7 +83,6 @@ router.delete("/candle/:id", handlersCandle.removeCandle);
  *       500:
  *         description: Some errors happend.
  */
-
 router.put("/candle/:id", handlersCandle.updateCandle);
 
 /**

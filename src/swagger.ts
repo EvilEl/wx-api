@@ -54,7 +54,57 @@ import swaggerJsdoc from 'swagger-jsdoc'
  *         name: 'Candle'
  *         count: 5
  *         price: 100
- *
+ *     Diffuser:
+ *       type: object
+ *       required:
+ *         - id
+ *         - name
+ *         - count
+ *         - price
+ *       properties:
+ *           id:
+ *            type: number
+ *           name:
+ *            type: string
+ *           count:
+ *            type: number
+ *           price:
+ *            type: number
+ *       example:
+ *           id:   1
+ *           name: 'Diffuser'
+ *           count: 20
+ *           price: 20
+*     DiffuserCreate:
+ *       type: object
+ *       required:
+ *         - name
+ *         - count
+ *         - price
+ *       properties:
+ *         name:
+ *           type: string
+ *         count:
+ *           type: number
+ *         price:
+ *           type: number
+ *       example:
+ *         name: 'Diffuser'
+ *         count: 5
+ *         price: 100
+ *     DiffuserUpdate:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *         count:
+ *           type: number
+ *         price:
+ *           type: number
+ *       example:
+ *         name: 'Diffuser'
+ *         count: 5
+ *         price: 100
  * @swagger
  *  tags:
  *    name: Candles

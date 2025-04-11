@@ -68,4 +68,15 @@ async function getDiffusers(_req: Request, res: Response) {
   }
 }
 
-export default { createDiffuser, removeDiffuser, updateDiffuser, getDiffusers };
+async function getDiffuser(req: Request<{ id: ProductId }>, res: Response) {
+  try {
+    const { id } = req.params
+    const data = await serviceDiffuser.getDiffuser(id);
+    res.status(200).json(data);
+  } catch (err) {
+    if (err instanceof Error) {
+      res.json({ message: err.message });
+    }
+  }
+}
+export default { createDiffuser, removeDiffuser, updateDiffuser, getDiffusers, getDiffuser };

@@ -24,4 +24,8 @@ async function getDiffusers() {
   return dbDiffuser.getDiffusers();
 }
 
-export default { createDiffuser, removeDiffuser, updateDiffuser, getDiffusers };
+async function getDiffuser(id: ProductId) {
+  return dbDiffuser.getDiffuser(id);
+}
+
+export default { createDiffuser, removeDiffuser, updateDiffuser, getDiffusers, getDiffuser };

@@ -73,7 +73,7 @@ router.delete("/sachet/:id", handlersSachet.removeSachet);
  *             $ref: '#/components/schemas/SachetUpdate'
  *     responses:
  *       200:
- *         decsription: The candle was updated
+ *         description: The candle was updated
  *         content:
  *           application/json:
  *             schema:

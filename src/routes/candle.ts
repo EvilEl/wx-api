@@ -75,7 +75,7 @@ router.delete("/candle/:id", handlersCandle.removeCandle);
  *             $ref: '#/components/schemas/CandleUpdate'
  *     responses:
  *       200:
- *         decsription: The candle was updated
+ *         description: The candle was updated
  *         content:
  *           application/json:
  *             schema:

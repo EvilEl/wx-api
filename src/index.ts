@@ -9,6 +9,7 @@ import { createTable } from "./db/dbCreateTable";
 import routerSachet from "./routes/sachet";
 import routerDiffuser from "./routes/diffuser";
 import routerCandle from "./routes/candle";
+import routerLogin from './routes/login'
 import openapiSpecification from './swagger'
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.json()); // Middleware для парсинга JSON
 app.use(routerSachet);
 app.use(routerDiffuser);
 app.use(routerCandle);
+app.use(routerLogin)
 app.use('/api-docs-tw', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 
 

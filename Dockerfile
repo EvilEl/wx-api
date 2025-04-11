@@ -15,6 +15,7 @@ COPY . .
 
 
 ENV PORT="3000"
+ENV PASSWORD="WaxSystem"
 
 EXPOSE 3000
 # Запуск

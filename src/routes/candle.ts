@@ -9,6 +9,8 @@ const router = express.Router();
  * /candle:
  *   post:
  *     summary: Create a new candle
+ *     security:
+ *       - bearerAuth: []
  *     tags: [Candles]
  *     requestBody:
  *       required: true

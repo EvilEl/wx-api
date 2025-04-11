@@ -156,9 +156,29 @@ import swaggerJsdoc from 'swagger-jsdoc'
  *         name: 'Sachet'
  *         count: 5
  *         price: 100
- * @swagger
- *  tags:
- *    name: Candles
+ *     LoginUser:
+ *       type: object
+ *       required:
+ *         - login
+ *         - password
+ *       properties:
+ *         login:
+ *           type: string
+ *         password:
+ *           type: string
+ *       example:
+ *         login: 'admin'
+ *         password: 'ddddd'
+ *     User:
+ *       type: object
+ *       properties:
+ *         userName:
+ *           type: string
+ *         token:
+ *           type: string
+ *       example:
+ *         userName: 'admin'
+ *         token: 'token'
  */
 
 const options = {
@@ -167,6 +187,16 @@ const options = {
     info: {
       title: 'Tw Base',
       version: '1.0.0',
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'apiKey',
+          name: 'Bear',
+          scheme: 'bearer',
+          in: 'header',
+        },
+      }
     },
   },
   apis: ['./src/routes/*.js', './src/routes/*.ts', './src/swagger.js', './src/swagger.ts'], // files containing annotations as above

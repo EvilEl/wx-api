@@ -33,7 +33,7 @@ function run(sql: string, ...params: unknown[]): Promise<RunResult | Error> {
     if (!_instance) {
       return rej(new Error("db is not initialized"));
     }
-    _instance.run(sql, params, function (err) {
+    _instance.run(sql, params, function (err: Error | null) {
       if (err) {
         rej(err);
       }
@@ -47,7 +47,7 @@ function all<T>(sql: string, ...params: unknown[]): Promise<T[] | Error> {
     if (!_instance) {
       return rej(new Error("db is not initialized"));
     }
-    _instance.all<T>(sql, params, function (err, rows) {
+    _instance.all<T>(sql, params, function (err: Error | null, rows: any[]) {
       if (err) {
         rej(err);
       }
@@ -56,4 +56,21 @@ function all<T>(sql: string, ...params: unknown[]): Promise<T[] | Error> {
   });
 }
 
-export { init, instance, run, all };
+
+
+function get<T>(sql: string, ...params: any[]): Promise<any> {
+  return new Promise((resolve, reject) => {
+    if (!_instance) {
+      return reject(new Error("Database not initialized"));
+    }
+    _instance.get<T>(sql, ...params, function (err: Error | null, row: any) {
+      if (err) {
+        return reject(err);
+      }
+      resolve(row);
+    });
+  });
+}
+
+
+export { init, instance, run, all, get };

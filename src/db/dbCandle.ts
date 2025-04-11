@@ -1,6 +1,6 @@
 import { PartialProductWithoutId, ProductId } from "../models/Product";
 import { createUpdateParams } from "../utils/formattedUpdateParams";
-import { run, all } from "./db";
+import { run, all, get } from "./db";
 
 async function createCandle(...params: unknown[]) {
   return run(
@@ -32,7 +32,12 @@ async function updateCandle(id: ProductId, data: PartialProductWithoutId) {
 async function getCandles() {
   return all(`
     SELECT * FROM candles
-  `);
+    `);
 }
 
-export default { createCandle, removeCandle, updateCandle, getCandles };
+async function getCandle(id: ProductId) {
+  const sql = 'SELECT * FROM candles WHERE id = ?';
+  return get(sql, id);
+}
+
+export default { createCandle, removeCandle, updateCandle, getCandles, getCandle };

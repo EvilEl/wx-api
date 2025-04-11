@@ -24,4 +24,11 @@ async function getCandles() {
   return dbCandle.getCandles();
 }
 
-export default { createCandle, removeCandle, updateCandle, getCandles };
+
+
+async function getCandle(id: ProductId) {
+  return dbCandle.getCandle(id);
+}
+
+
+export default { createCandle, removeCandle, updateCandle, getCandles, getCandle };

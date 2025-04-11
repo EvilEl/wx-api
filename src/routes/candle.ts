@@ -18,7 +18,7 @@ const router = express.Router();
  *             $ref: '#/components/schemas/CandleCreate'
  *     responses:
  *       200:
- *         description: The book was successfully created
+ *         description: The candle was successfully created
  *         content:
  *           application/json:
  *             schema:
@@ -48,7 +48,7 @@ router.post("/candle", handlersCandle.createCandle);
  *            type: integer
  *      responses:
  *        200:
- *          description: The book was deleted
+ *          description: The candle was deleted
  *        404:
  *          description: The post was not found
  */
@@ -66,7 +66,7 @@ router.delete("/candle/:id", handlersCandle.removeCandle);
  *         schema:
  *           type: integer
  *         required: true
- *         description: book id
+ *         description: candle id
  *     requestBody:
  *       required: true
  *       content:
@@ -75,7 +75,7 @@ router.delete("/candle/:id", handlersCandle.removeCandle);
  *             $ref: '#/components/schemas/CandleUpdate'
  *     responses:
  *       200:
- *         decsription: The book was updated
+ *         decsription: The candle was updated
  *         content:
  *           application/json:
  *             schema:
@@ -104,12 +104,11 @@ router.put("/candle/:id", handlersCandle.updateCandle);
  */
 router.get("/candles", handlersCandle.getCandles);
 
-//TODO добавить получение candle по Id
 /**
  * @swagger
  * /candle/{id}:
  *   get:
- *     summary: Gets a candle by id
+ *     summary: Get a candle by id
  *     tags: [Candles]
  *     parameters:
  *       - in : path
@@ -126,12 +125,9 @@ router.get("/candles", handlersCandle.getCandles);
  *             schema:
  *               $ref: '#/components/schemas/Candle'
  *       404:
- *         description: book is not found
+ *         description: candle is not found
  */
-router.get('/candle/:id', () => {
-  console.log('get candle id');
-
-})
+router.get('/candle/:id', handlersCandle.getCandle)
 
 export default router;
 

@@ -69,7 +69,7 @@ async function updateCandle(
   }
 }
 
-async function getCandles(_req: Request, res: Response) {
+async function getCandles(req: Request, res: Response) {
   try {
     const data = await serviceCandle.getCandles();
     res.status(200).json(data);
@@ -80,4 +80,21 @@ async function getCandles(_req: Request, res: Response) {
   }
 }
 
-export default { createCandle, removeCandle, updateCandle, getCandles };
+
+async function getCandle(req: Request<{ id: ProductId }>, res: Response) {
+  try {
+
+    const { id } = req.params
+    const data = await serviceCandle.getCandle(id);
+    console.log('data', data);
+
+    res.status(200).json(data);
+  } catch (err) {
+    if (err instanceof Error) {
+      res.json({ message: err.message });
+    }
+  }
+}
+
+
+export default { createCandle, removeCandle, updateCandle, getCandles, getCandle };

@@ -8,4 +8,4 @@ export interface LoginUser {
   login: string
 }
 
-
+export type Login = LoginUser['login']

@@ -1,5 +1,5 @@
 export interface BDUser {
-  name: string;
+  login: string;
   password: string
 }
 

@@ -1,6 +1,6 @@
 import express from "express";
-import handlersSachet from "../handlers/handlerSachet";
-
+import handlersSachet from "../handlers/handlerSachet"
+import authenticateToken from '../middlewear/authenticateToken'
 const router = express.Router();
 
 /**
@@ -29,7 +29,7 @@ const router = express.Router();
  *       400:
  *         description: Invalid input
  */
-router.post("/sachet", handlersSachet.createSachet);
+router.post("/sachet", authenticateToken, handlersSachet.createSachet);
 
 /**
  * @swagger
@@ -50,8 +50,7 @@ router.post("/sachet", handlersSachet.createSachet);
  *        404:
  *          description: The post was not found
  */
-router.delete("/sachet/:id", handlersSachet.removeSachet);
-
+router.delete("/sachet/:id", authenticateToken, handlersSachet.removeSachet);
 /**
  * @swagger
  * /sachet/{id}:
@@ -81,7 +80,7 @@ router.delete("/sachet/:id", handlersSachet.removeSachet);
  *       500:
  *         description: Some errors happend.
  */
-router.put("/sachet/:id", handlersSachet.updateSachet);
+router.put("/sachet/:id", authenticateToken, handlersSachet.updateSachet);
 
 /**
  * @swagger

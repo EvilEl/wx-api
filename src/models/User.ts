@@ -1,3 +1,9 @@
+export interface BDUser {
+  name: string;
+  password: string
+}
+
+
 export interface ProfileUser {
   name: string;
   token: string

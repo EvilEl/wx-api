@@ -1,7 +1,7 @@
-import { Login, ProfileUser } from '../models/User'
+import { Login, BDUser } from '../models/User'
 import db from '../db/dbUser'
 
-async function getUser(login: Login): Promise<ProfileUser> {
+async function getUser(login: Login): Promise<BDUser> {
   return db.getUser(login)
 }
 

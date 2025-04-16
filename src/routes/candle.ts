@@ -41,6 +41,8 @@ router.post("/candle", authenticateToken, handlersCandle.createCandle);
  *  /candle/{id}:
  *    delete:
  *      summary: Removes a candle by id
+ *      security:
+ *       - bearerAuth: []
  *      tags: [Candles]
  *      parameters:
  *        - in: path
@@ -62,6 +64,8 @@ router.delete("/candle/:id", authenticateToken, handlersCandle.removeCandle);
  * /candle/{id}:
  *   put:
  *     summary: Updates a candle by id
+ *     security:
+ *      - bearerAuth: []
  *     tags: [Candles]
  *     parameters:
  *       - in: path

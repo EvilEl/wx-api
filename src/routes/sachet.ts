@@ -8,6 +8,8 @@ const router = express.Router();
  * /sachet:
  *   post:
  *     summary: Create a new sachet
+ *     security:
+ *      - bearerAuth: []
  *     tags: [Sachets]
  *     requestBody:
  *       required: true
@@ -36,6 +38,8 @@ router.post("/sachet", authenticateToken, handlersSachet.createSachet);
  *  /sachet/{id}:
  *    delete:
  *      summary: Removes a sachet by id
+ *      security:
+ *       - bearerAuth: []
  *      tags: [Sachets]
  *      parameters:
  *        - in: path
@@ -56,6 +60,8 @@ router.delete("/sachet/:id", authenticateToken, handlersSachet.removeSachet);
  * /sachet/{id}:
  *   put:
  *     summary: Updates a sachet by id
+ *     security:
+ *      - bearerAuth: []
  *     tags: [Sachets]
  *     parameters:
  *       - in: path

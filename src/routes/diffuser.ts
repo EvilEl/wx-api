@@ -10,6 +10,8 @@ const router = express.Router();
  * /diffuser:
  *   post:
  *     summary: Create a new diffuser
+ *     security:
+ *      - bearerAuth: []
  *     tags: [Diffusers]
  *     requestBody:
  *       required: true
@@ -38,6 +40,8 @@ router.post("/diffuser", authenticateToken, handlerDiffuser.createDiffuser);
  *  /diffuser/{id}:
  *    delete:
  *      summary: Removes a diffuser by id
+ *      security:
+ *       - bearerAuth: []
  *      tags: [Diffusers]
  *      parameters:
  *        - in: path
@@ -59,6 +63,8 @@ router.delete("/removeDiffuser/:id", authenticateToken, handlerDiffuser.removeDi
  * /diffuser/{id}:
  *   put:
  *     summary: Updates a diffuser by id
+ *     security:
+ *      - bearerAuth: []
  *     tags: [Diffusers]
  *     parameters:
  *       - in: path

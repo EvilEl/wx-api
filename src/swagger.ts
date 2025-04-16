@@ -192,7 +192,7 @@ const options = {
       securitySchemes: {
         bearerAuth: {
           type: 'apiKey',
-          name: 'Bear',
+          name: 'Authorization',
           scheme: 'bearer',
           in: 'header',
         },

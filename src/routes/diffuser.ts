@@ -1,5 +1,7 @@
 import express from "express";
 import handlerDiffuser from "../handlers/handlerDiffuser";
+import authenticateToken from '../middlewear/authenticateToken'
+
 const router = express.Router();
 
 
@@ -29,7 +31,7 @@ const router = express.Router();
  *       400:
  *         description: Invalid input
  */
-router.post("/diffuser", handlerDiffuser.createDiffuser);
+router.post("/diffuser", authenticateToken, handlerDiffuser.createDiffuser);
 
 /**
  * @swagger
@@ -50,7 +52,7 @@ router.post("/diffuser", handlerDiffuser.createDiffuser);
  *        404:
  *          description: The post was not found
  */
-router.delete("/removeDiffuser/:id", handlerDiffuser.removeDiffuser);
+router.delete("/removeDiffuser/:id", authenticateToken, handlerDiffuser.removeDiffuser);
 
 /**
  * @swagger
@@ -81,7 +83,7 @@ router.delete("/removeDiffuser/:id", handlerDiffuser.removeDiffuser);
  *       500:
  *         description: Some errors happend.
  */
-router.put("/updateDiffuser/:id", handlerDiffuser.updateDiffuser);
+router.put("/updateDiffuser/:id", authenticateToken, handlerDiffuser.updateDiffuser);
 
 
 /**

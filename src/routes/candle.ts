@@ -1,5 +1,6 @@
 import express from "express";
 import handlersCandle from "../handlers/handlerCandle";
+import authenticateToken from '../middlewear/authenticateToken'
 
 const router = express.Router();
 
@@ -32,7 +33,7 @@ const router = express.Router();
  *       400:
  *         description: Invalid input
  */
-router.post("/candle", handlersCandle.createCandle);
+router.post("/candle", authenticateToken, handlersCandle.createCandle);
 
 
 /**
@@ -54,7 +55,7 @@ router.post("/candle", handlersCandle.createCandle);
  *        404:
  *          description: The post was not found
  */
-router.delete("/candle/:id", handlersCandle.removeCandle);
+router.delete("/candle/:id", authenticateToken, handlersCandle.removeCandle);
 
 /**
  * @swagger
@@ -85,7 +86,7 @@ router.delete("/candle/:id", handlersCandle.removeCandle);
  *       500:
  *         description: Some errors happend.
  */
-router.put("/candle/:id", handlersCandle.updateCandle);
+router.put("/candle/:id", authenticateToken, handlersCandle.updateCandle);
 
 /**
  * @swagger

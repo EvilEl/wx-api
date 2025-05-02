@@ -40,5 +40,5 @@ async function getDiffuser(id: ProductId) {
   return get(sql, id);
 }
 
-getDiffuser
+
 export default { createDiffuser, removeDiffuser, updateDiffuser, getDiffusers, getDiffuser };

@@ -9,7 +9,7 @@ import {
 } from "../models/Product";
 
 async function createSachet(
-  req: Request<{}, {}, ProductWithoutId>,
+  req: Request<object, object, ProductWithoutId>,
   res: Response
 ) {
   try {
@@ -42,7 +42,7 @@ async function removeSachet(req: Request<{ id: ProductId }>, res: Response) {
 }
 
 async function updateSachet(
-  req: Request<{ id: ProductId }, {}, Partial<PartialProductWithoutId>>,
+  req: Request<{ id: ProductId }, object, Partial<PartialProductWithoutId>>,
   res: Response
 ) {
   const { id } = req.params;

@@ -3,14 +3,13 @@ import {
   ProductId,
   ProductWithoutId,
   PartialProductWithoutId,
-  IProduct,
 } from "../models/Product";
 import serviceCandle from "../service/serviceCandle";
 import { Request, Response } from 'express';
 
 
 async function createCandle(
-  req: Request<{}, {}, ProductWithoutId>,
+  req: Request<object, object, ProductWithoutId>,
   res: Response
 ) {
   try {
@@ -53,7 +52,7 @@ async function removeCandle(req: Request<{ id: ProductId }>, res: Response) {
 }
 
 async function updateCandle(
-  req: Request<{ id: ProductId }, {}, Partial<PartialProductWithoutId>>,
+  req: Request<{ id: ProductId }, object, Partial<PartialProductWithoutId>>,
   res: Response
 ) {
   const { id } = req.params;

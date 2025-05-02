@@ -14,4 +14,11 @@ export interface LoginUser {
   login: string
 }
 
+
+export interface UserBase {
+  name: string;
+  password: string,
+  id: number
+}
+
 export type Login = LoginUser['login']

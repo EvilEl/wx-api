@@ -47,7 +47,7 @@ function all<T>(sql: string, ...params: unknown[]): Promise<T[] | Error> {
     if (!_instance) {
       return rej(new Error("db is not initialized"));
     }
-    _instance.all<T>(sql, params, function (err: Error | null, rows: any[]) {
+    _instance.all<T>(sql, params, function (err: Error | null, rows: T[]) {
       if (err) {
         rej(err);
       }
@@ -56,14 +56,12 @@ function all<T>(sql: string, ...params: unknown[]): Promise<T[] | Error> {
   });
 }
 
-
-
-function get<T>(sql: string, ...params: any[]): Promise<any> {
+function get<T>(sql: string, ...params: unknown[]): Promise<T | undefined | Error> {
   return new Promise((resolve, reject) => {
     if (!_instance) {
       return reject(new Error("Database not initialized"));
     }
-    _instance.get<T>(sql, ...params, function (err: Error | null, row: any) {
+    _instance.get<T>(sql, params, function (err: Error | null, row: T | undefined) {
       if (err) {
         return reject(err);
       }

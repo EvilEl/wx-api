@@ -6,7 +6,7 @@ import { LoginUser } from '../models/User'
 import { HttpStatus } from '../enums/http-status';
 
 
-async function login(req: Request<{}, {}, LoginUser>, res: Response) {
+async function login(req: Request<object, object, LoginUser>, res: Response) {
   const { login, password } = req.body;
   try {
     const user = await serviceLogin.getUser(login);
@@ -19,9 +19,10 @@ async function login(req: Request<{}, {}, LoginUser>, res: Response) {
       res.status(HttpStatus.OK).send({ token, login })
     }
   } catch (err) {
-    console.log(err);
+    if (err instanceof Error) {
+      res.json({ err: err.message })
+    }
   }
 }
-
 
 export default { login }

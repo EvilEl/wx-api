@@ -6,9 +6,8 @@ import {
 } from "../models/Product";
 import serviceDiffuser from "../service/serviceDiffuser";
 import { Request, Response } from "express";
-
 async function createDiffuser(
-  req: Request<{}, {}, ProductWithoutId>,
+  req: Request<object, object, ProductWithoutId>,
   res: Response
 ) {
   try {
@@ -41,7 +40,7 @@ async function removeDiffuser(req: Request<{ id: ProductId }>, res: Response) {
 }
 
 async function updateDiffuser(
-  req: Request<{ id: ProductId }, {}, Partial<PartialProductWithoutId>>,
+  req: Request<{ id: ProductId }, object, Partial<PartialProductWithoutId>>,
   res: Response
 ) {
   const { id } = req.params;

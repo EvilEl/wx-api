@@ -1,8 +1,8 @@
-import { Login, UserBase } from "../models/User";
+import { Login, BDUser } from "../models/User";
 import { get } from "./db";
 
-async function getUser(login: Login): Promise<UserBase> {
-  const result = await get<UserBase>('SELECT * FROM users WHERE login = ?', login);
+async function getUser(login: Login): Promise<BDUser> {
+  const result = await get<BDUser>('SELECT * FROM users WHERE login = ?', login);
   if (result instanceof Error) {
     throw result;
   }

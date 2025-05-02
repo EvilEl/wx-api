@@ -20,7 +20,11 @@ async function login(req: Request<object, object, LoginUser>, res: Response) {
     }
   } catch (err) {
     if (err instanceof Error) {
-      res.json({ err: err.message })
+      if (err.message === 'User not found') {
+        res.status(HttpStatus.UNAUTHORIZED).json({ message: 'Неверное имя пользователя или пароль' });
+      } else {
+        res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Произошла ошибка при авторизации' });
+      }
     }
   }
 }

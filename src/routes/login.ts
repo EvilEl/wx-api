@@ -27,6 +27,8 @@ const router = express.Router();
  *         description: Some server error
  *       400:
  *         description: Invalid input
+ *       401:
+ *         description: Not correct password or login
  */
 router.post('/login', handlerLogin.login)
 

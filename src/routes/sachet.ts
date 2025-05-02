@@ -1,6 +1,6 @@
 import express from "express";
-import handlersSachet from "../handlers/handlerSachet";
-
+import handlersSachet from "../handlers/handlerSachet"
+import authenticateToken from '../middlewear/authenticateToken'
 const router = express.Router();
 
 /**
@@ -8,6 +8,8 @@ const router = express.Router();
  * /sachet:
  *   post:
  *     summary: Create a new sachet
+ *     security:
+ *      - bearerAuth: []
  *     tags: [Sachets]
  *     requestBody:
  *       required: true
@@ -29,13 +31,15 @@ const router = express.Router();
  *       400:
  *         description: Invalid input
  */
-router.post("/sachet", handlersSachet.createSachet);
+router.post("/sachet", authenticateToken, handlersSachet.createSachet);
 
 /**
  * @swagger
  *  /sachet/{id}:
  *    delete:
  *      summary: Removes a sachet by id
+ *      security:
+ *       - bearerAuth: []
  *      tags: [Sachets]
  *      parameters:
  *        - in: path
@@ -50,13 +54,14 @@ router.post("/sachet", handlersSachet.createSachet);
  *        404:
  *          description: The post was not found
  */
-router.delete("/sachet/:id", handlersSachet.removeSachet);
-
+router.delete("/sachet/:id", authenticateToken, handlersSachet.removeSachet);
 /**
  * @swagger
  * /sachet/{id}:
  *   put:
  *     summary: Updates a sachet by id
+ *     security:
+ *      - bearerAuth: []
  *     tags: [Sachets]
  *     parameters:
  *       - in: path
@@ -81,7 +86,7 @@ router.delete("/sachet/:id", handlersSachet.removeSachet);
  *       500:
  *         description: Some errors happend.
  */
-router.put("/sachet/:id", handlersSachet.updateSachet);
+router.put("/sachet/:id", authenticateToken, handlersSachet.updateSachet);
 
 /**
  * @swagger

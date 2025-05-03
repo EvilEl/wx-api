@@ -44,14 +44,27 @@ async function createUsers() {
   }
 }
 
-
+async function createFilesTable() {
+  await run(`CREATE TABLE IF NOT EXISTS files (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    filename TEXT NOT NULL,
+    originalname TEXT NOT NULL,
+    mimeType TEXT NOT NULL,
+    size INTEGER NOT NULL DEFAULT 0,
+    link TEXT DEFAULT NULL,
+    base64 TEXT DEFAULT NULL,
+    createdDate DATETIME DEFAULT CURRENT_TIMESTAMP,
+    idProduct INTEGER DEFAULT NULL
+  )`);
+}
 
 
 function createTable() {
   createTableCandles();
   createTableDiffusers();
   createTableSachets();
-  createUsers()
+  createUsers();
+  createFilesTable();
 }
 
 export { createTable };

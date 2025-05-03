@@ -13,7 +13,7 @@ async function createDiffuser(
   try {
     const { name, count, price } = req.body;
     await serviceDiffuser.createDiffuser({ name, count, price });
-    res.status(200).json();
+    res.status(HttpStatus.CREATED).json();
   } catch (err) {
     if (err instanceof Error) {
       if (err.message.includes("UNIQUE")) {

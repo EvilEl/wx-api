@@ -179,6 +179,79 @@ import swaggerJsdoc from 'swagger-jsdoc'
  *       example:
  *         userName: 'admin'
  *         token: 'token'
+ *     Files:
+ *       type: Array
+ *       required:
+ *         - id
+ *         - filename
+ *         - originalname
+ *         - mimeType
+ *         - size
+ *         - link
+ *         - base64
+ *         - createdDate
+ *       properties:
+ *           id:
+ *            type: number
+ *           filename:
+ *            type: string
+ *           originalname:
+ *            type: string
+ *           mimeType:
+ *            type: string
+ *           size:
+ *            type: number
+ *           link:
+ *            type: string
+ *           base64:
+ *            type: string
+ *           createdDate:
+ *            type: string
+ *            format: date-time
+ *           idProduct:
+ *            type: number
+ *       example:
+ *         - id: 1
+ *           filename: '1'
+ *           originalname: '1.png'
+ *           mimeType: 'image/png'
+ *           size: 20000
+ *           base64: 'dasdasdasdasd'
+ *           createdDate: '2025-04-28 21:37:20'
+ *           idProduct: 1
+ *     FilesCreate:
+ *       type: Array
+ *       required:
+ *         - filename
+ *         - idProduct
+ *         - originalname
+ *         - mimeType
+ *         - size
+ *         - link
+ *         - base64
+ *       properties:
+ *         filename:
+ *           type: 'string'
+ *         originalname:
+ *           type: string
+ *         idProduct:
+ *           type: number
+ *         mimeType:
+ *           type: string
+ *         size:
+ *           type: number
+ *         link:
+ *           type: string
+ *         base64:
+ *           type: string
+ *       example:
+ *         - filename: '1'
+ *           originalname: '1.png'
+ *           mimeType: 'image/png'
+ *           size: 20000
+ *           link: 'dasdasas'
+ *           base64: 'dasdasdasdasd'
+ *           idProduct: 1
  */
 
 const options = {
@@ -192,10 +265,9 @@ const options = {
       securitySchemes: {
         bearerAuth: {
           type: 'http',
-          name: 'Authorization',
           scheme: 'bearer',
           bearerFormat: 'JWT',
-          in: 'header',
+          description: 'JWT Authorization header using the Bearer scheme. Example: "Authorization: Bearer {token}"'
         },
       }
     },

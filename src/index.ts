@@ -10,6 +10,7 @@ import routerSachet from "./routes/sachet";
 import routerDiffuser from "./routes/diffuser";
 import routerCandle from "./routes/candle";
 import routerLogin from './routes/login'
+import routerFiles from './routes/files'
 import openapiSpecification from './swagger'
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(routerSachet);
 app.use(routerDiffuser);
 app.use(routerCandle);
 app.use(routerLogin)
+app.use(routerFiles)
 app.use('/api-docs-tw', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 
 

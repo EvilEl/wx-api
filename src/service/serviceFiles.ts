@@ -1,8 +1,8 @@
 import db from "../db/dbFiles";
 import { File, FileId, FileIdProduct } from "../models/File";
 
-async function createFiles(files: File[]) {
-  return db.createFiles(files);
+async function createFile(file: File) {
+  return db.createFile(file);
 }
 
 async function removeFile(id: FileId) {
@@ -20,4 +20,4 @@ async function getAllFilesForIdProduct(id: FileIdProduct) {
 
 
 
-export default { createFiles, removeFile, removeFilesIdProduct, getAllFilesForIdProduct };
+export default { createFile, removeFile, removeFilesIdProduct, getAllFilesForIdProduct };

@@ -180,7 +180,7 @@ import swaggerJsdoc from 'swagger-jsdoc'
  *         userName: 'admin'
  *         token: 'token'
  *     Files:
- *       type: Array
+ *       type: object
  *       required:
  *         - id
  *         - filename
@@ -211,7 +211,7 @@ import swaggerJsdoc from 'swagger-jsdoc'
  *           idProduct:
  *            type: number
  *       example:
- *         - id: 1
+ *           id: 1
  *           filename: '1'
  *           originalname: '1.png'
  *           mimeType: 'image/png'
@@ -220,7 +220,7 @@ import swaggerJsdoc from 'swagger-jsdoc'
  *           createdDate: '2025-04-28 21:37:20'
  *           idProduct: 1
  *     FilesCreate:
- *       type: Array
+ *       type: object
  *       required:
  *         - filename
  *         - idProduct
@@ -245,7 +245,7 @@ import swaggerJsdoc from 'swagger-jsdoc'
  *         base64:
  *           type: string
  *       example:
- *         - filename: '1'
+ *           filename: '1'
  *           originalname: '1.png'
  *           mimeType: 'image/png'
  *           size: 20000

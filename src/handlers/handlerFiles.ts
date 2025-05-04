@@ -5,25 +5,24 @@ import {
   File, FileId, FileIdProduct
 } from "../models/File";
 
-async function createFiles(
-  req: Request<object, object, File[]>,
+async function createFile(
+  req: Request<object, object, File>,
   res: Response
 ) {
   try {
-    const files = req.body
-    if (!files.every(file =>
-      file.filename &&
-      file.originalname &&
-      file.mimeType &&
-      file.size &&
-      file.link &&
-      file.base64 &&
-      file.idProduct
-    )) {
+    const file = req.body
+    if (!file.filename ||
+      !file.originalname ||
+      !file.mimeType ||
+      !file.size ||
+      !file.link ||
+      !file.base64 ||
+      !file.idProduct
+    ) {
       res.status(HttpStatus.BAD_REQUEST).json('Не заполнены поля');
       return;
     }
-    await serviceFiles.createFiles(files);
+    await serviceFiles.createFile(file);
     res.status(HttpStatus.CREATED).json();
   } catch (err) {
     if (err instanceof Error) {
@@ -72,4 +71,4 @@ async function getAllFilesForIdProduct(req: Request<{ id: FileIdProduct }>, res:
   }
 }
 
-export default { createFiles, removeFile, removeFilesIdProduct, getAllFilesForIdProduct, };
+export default { createFile, removeFile, removeFilesIdProduct, getAllFilesForIdProduct, };

@@ -6,7 +6,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /files:
+ * /files/product:
  *   post:
  *     summary: Create a new file
  *     security:
@@ -32,8 +32,7 @@ const router = express.Router();
  *       400:
  *         description: Invalid input
  */
-// router.post("/files", authenticateToken, handlerFiles.createFile);
-router.post("/files", authenticateToken, handlerFiles.createFiles);
+router.post("/files/product", authenticateToken, handlerFiles.createFile);
 
 
 /**
@@ -61,7 +60,7 @@ router.delete("/files/:id", authenticateToken, handlerFiles.removeFilesIdProduct
 
 /**
  * @swagger
- * /files/{id}:
+ * /files/product/{id}:
  *   get:
  *     summary: Get a files by id
  *     security:

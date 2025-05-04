@@ -190,6 +190,7 @@ import swaggerJsdoc from 'swagger-jsdoc'
  *         - link
  *         - base64
  *         - createdDate
+ *         - idProduct
  *       properties:
  *           id:
  *            type: number

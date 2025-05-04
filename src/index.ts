@@ -16,7 +16,7 @@ import openapiSpecification from './swagger'
 const app = express();
 app.use(cors()) // ✅ разрешает все источники
 app.use(morgan('dev')); // простой логгер
-app.use(express.json()); // Middleware для парсинга JSON
+app.use(express.json({ limit: '10mb' })); // Middleware для парсинга JSON
 app.use(routerSachet);
 app.use(routerDiffuser);
 app.use(routerCandle);

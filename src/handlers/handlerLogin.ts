@@ -15,7 +15,7 @@ async function login(req: Request<object, object, LoginUser>, res: Response) {
       res.status(HttpStatus.UNAUTHORIZED).json({ message: 'Неверное имя пользователя или пароль' });
     } else {
       const jwtKey = process.env.JWT_SECRET_KEY ?? ''
-      const token = jwt.sign({ login: user.login }, jwtKey, { expiresIn: '1h' });
+      const token = jwt.sign({ login: user.login }, jwtKey, { expiresIn: '4h' });
       res.status(HttpStatus.OK).send({ token, login })
     }
   } catch (err) {

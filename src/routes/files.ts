@@ -83,6 +83,6 @@ router.delete("/files/:id", authenticateToken, handlerFiles.removeFilesIdProduct
  *       404:
  *         description: files is not found
  */
-router.get('/files/:id', authenticateToken, handlerFiles.getAllFilesForIdProduct)
+router.get('/files/product/:id', authenticateToken, handlerFiles.getAllFilesForIdProduct)
 
 export default router;

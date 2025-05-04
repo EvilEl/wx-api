@@ -12,10 +12,8 @@ async function createFile(
   try {
     const file = req.body
     if (!file.filename ||
-      !file.originalname ||
       !file.mimeType ||
       !file.size ||
-      !file.link ||
       !file.base64 ||
       !file.idProduct
     ) {
@@ -71,4 +69,4 @@ async function getAllFilesForIdProduct(req: Request<{ id: FileIdProduct }>, res:
   }
 }
 
-export default { createFile, removeFile, removeFilesIdProduct, getAllFilesForIdProduct, };
+export default { createFile, removeFile, removeFilesIdProduct, getAllFilesForIdProduct };

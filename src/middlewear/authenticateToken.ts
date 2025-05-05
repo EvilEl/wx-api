@@ -15,7 +15,7 @@ function authenticateToken(req: Request<any>, res: Response, next: NextFunction)
       console.log('verify', err);
       console.log('verify', user);
       if (err) {
-        res.status(HttpStatus.FORBIDDEN).json({ message: 'Недействительный токен' });
+        res.status(HttpStatus.UNAUTHORIZED).json({ message: 'Недействительный токен' });
       } else {
         next()
       }

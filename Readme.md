@@ -10,7 +10,7 @@ npm run start
 # 📦 cборка Docker
 
 ```bash 
-docker build -t procjet:demo .
+docker build -t project:demo .
 ```
 
 # 📘 Swagger-документация

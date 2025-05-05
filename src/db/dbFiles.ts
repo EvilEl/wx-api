@@ -23,19 +23,7 @@ async function saveFile(fileData: File) {
   );
 }
 
-async function createFiles(files: File[]) {
-  const placeholders = files.map(() => '(?, ?, ?, ?, ?, ?, ?, ?)').join(',');
-  const values = files.flatMap(file => [
-    file.filename,
-    file.originalname,
-    file.mimeType,
-    file.size,
-    file.link,
-    file.base64,
-    file.idProduct,
-    new Date().toISOString()
-  ]);
-
+async function createFile(file: File) {
   return run(
     `INSERT INTO files (
       filename,
@@ -46,8 +34,15 @@ async function createFiles(files: File[]) {
       base64,
       idProduct,
       createdDate
-    ) VALUES ${placeholders}`,
-    ...values
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    file.filename,
+    file.originalname,
+    file.mimeType,
+    file.size,
+    file.link,
+    file.base64,
+    file.idProduct,
+    new Date().toISOString()
   );
 }
 
@@ -74,7 +69,7 @@ async function deleteFilesIdProduct(id: FileIdProduct) {
 
 export default {
   saveFile,
-  createFiles,
+  createFile,
   getFileById,
   getAllFiles,
   deleteFile,

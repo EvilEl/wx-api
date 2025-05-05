@@ -34,6 +34,28 @@ const router = express.Router();
  */
 router.post("/files/product", authenticateToken, handlerFiles.createFile);
 
+/**
+ * @swagger
+ *  /files/product/{id}:
+ *    delete:
+ *      summary: Removes files by product id
+ *      security:
+ *       - bearerAuth: []
+ *      tags: [Files]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          description: product id
+ *          required: true
+ *          schema:
+ *            type: integer
+ *      responses:
+ *        200:
+ *          description: The files were successfully deleted
+ *        404:
+ *          description: The files were not found
+ */
+router.delete("/files/product/:id", authenticateToken, handlerFiles.removeFilesIdProduct);
 
 /**
  * @swagger
@@ -56,13 +78,13 @@ router.post("/files/product", authenticateToken, handlerFiles.createFile);
  *        404:
  *          description: The post was not found
  */
-router.delete("/files/:id", authenticateToken, handlerFiles.removeFilesIdProduct);
+router.delete("/files/:id", authenticateToken, handlerFiles.removeFile);
 
 /**
  * @swagger
  * /files/product/{id}:
  *   get:
- *     summary: Get a files by id
+ *     summary: Get a files by product id
  *     security:
  *      - bearerAuth: []
  *     tags: [Files]

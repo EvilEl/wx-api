@@ -23,19 +23,14 @@ async function createCandle(
   } catch (err) {
     if (err instanceof Error) {
       if (err.message.includes("UNIQUE")) {
-        res.status(HttpStatus.CONFLICT).json({
-          message: 'Конфликт: уже существует'
-        });
+        //TODO добавить у остальных запросов такую ошибку
+        res.status(HttpStatus.CONFLICT).json('Конфликт: уже существует');
         return
       }
-      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-        message: err.message
-      });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(err.message);
       return
     }
-    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-      message: 'Неизвестная ошибка'
-    });
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json('Неизвестная ошибка');
     return
   }
 };

@@ -23,7 +23,6 @@ async function createCandle(
   } catch (err) {
     if (err instanceof Error) {
       if (err.message.includes("UNIQUE")) {
-        //TODO добавить у остальных запросов такую ошибку
         res.status(HttpStatus.CONFLICT).json('Конфликт: уже существует');
         return
       }
@@ -41,7 +40,7 @@ async function removeCandle(req: Request<{ id: ProductId }>, res: Response) {
     res.status(200).json();
   } catch (err) {
     if (err instanceof Error) {
-      res.json({ message: err.message });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: err.message });
     }
   }
 }
@@ -52,13 +51,12 @@ async function updateCandle(
 ) {
   const { id } = req.params;
   const body = req.body;
-
   try {
     await serviceCandle.updateCandle(id, body);
     res.status(200).json();
   } catch (err) {
     if (err instanceof Error) {
-      res.json({ message: err.message });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: err.message });
     }
   }
 }
@@ -69,7 +67,7 @@ async function getCandles(req: Request, res: Response) {
     res.status(200).json(data);
   } catch (err) {
     if (err instanceof Error) {
-      res.json({ message: err.message });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: err.message });
     }
   }
 }
@@ -77,15 +75,12 @@ async function getCandles(req: Request, res: Response) {
 
 async function getCandle(req: Request<{ id: ProductId }>, res: Response) {
   try {
-
     const { id } = req.params
     const data = await serviceCandle.getCandle(id);
-    console.log('data', data);
-
     res.status(200).json(data);
   } catch (err) {
     if (err instanceof Error) {
-      res.json({ message: err.message });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: err.message });
     }
   }
 }

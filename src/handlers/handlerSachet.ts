@@ -19,13 +19,14 @@ async function createSachet(
   } catch (err) {
     if (err instanceof Error) {
       if (err.message.includes("UNIQUE")) {
-        res.status(HttpStatus.CONFLICT);
-      } else {
-        res.status(HttpStatus.OK);
+        res.status(HttpStatus.CONFLICT).json('Конфликт: уже существует');
+        return
       }
-      res.json({ message: err.message });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(err.message);
+      return
     }
-    res.json({ message: "Ошибка" });
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json('Неизвестная ошибка');
+    return
   }
 }
 

@@ -19,8 +19,6 @@ function authenticateToken(req: Request<any>, res: Response, next: NextFunction)
       } else {
         next()
       }
-
-
     })
   }
 }

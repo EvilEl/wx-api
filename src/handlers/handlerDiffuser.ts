@@ -17,13 +17,14 @@ async function createDiffuser(
   } catch (err) {
     if (err instanceof Error) {
       if (err.message.includes("UNIQUE")) {
-        res.status(HttpStatus.CONFLICT);
-      } else {
-        res.status(HttpStatus.OK);
+        res.status(HttpStatus.CONFLICT).json('Конфликт: уже существует');
+        return
       }
-      res.json({ message: err.message });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json(err.message);
+      return
     }
-    res.json({ message: "Ошибка" });
+    res.status(HttpStatus.INTERNAL_SERVER_ERROR).json('Неизвестная ошибка');
+    return
   }
 }
 
@@ -34,7 +35,7 @@ async function removeDiffuser(req: Request<{ id: ProductId }>, res: Response) {
     res.status(200).json();
   } catch (err) {
     if (err instanceof Error) {
-      res.json({ message: err.message });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: err.message });
     }
   }
 }
@@ -51,7 +52,7 @@ async function updateDiffuser(
     res.status(200).json();
   } catch (err) {
     if (err instanceof Error) {
-      res.json({ message: err.message });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: err.message });
     }
   }
 }
@@ -62,7 +63,7 @@ async function getDiffusers(_req: Request, res: Response) {
     res.status(200).json(data);
   } catch (err) {
     if (err instanceof Error) {
-      res.json({ message: err.message });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: err.message });
     }
   }
 }
@@ -71,10 +72,10 @@ async function getDiffuser(req: Request<{ id: ProductId }>, res: Response) {
   try {
     const { id } = req.params
     const data = await serviceDiffuser.getDiffuser(id);
-    res.status(200).json(data);
+    res.status(HttpStatus.OK).json(data);
   } catch (err) {
     if (err instanceof Error) {
-      res.json({ message: err.message });
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: err.message });
     }
   }
 }

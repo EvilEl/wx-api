@@ -1,6 +1,7 @@
 export interface BDUser {
   login: string;
-  password: string
+  password: string;
+  refreshToken?: string | null;
 }
 
 

@@ -1,5 +1,6 @@
 import { run, get } from "./db";
 import bcrypt from 'bcrypt'
+import { addRefreshTokenColumn } from "./migration";
 
 async function createTableCandles() {
   run(`CREATE TABLE IF NOT EXISTS candles (
@@ -33,7 +34,8 @@ async function createUsers() {
   await run(`CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     login TEXT UNIQUE,
-    password TEXT NOT NULL
+    password TEXT NOT NULL,
+    refreshToken TEXT
   )`);
 
 
@@ -59,12 +61,13 @@ async function createFilesTable() {
 }
 
 
-function createTable() {
-  createTableCandles();
-  createTableDiffusers();
-  createTableSachets();
-  createUsers();
-  createFilesTable();
+async function createTable() {
+  await createTableCandles();
+  await createTableDiffusers();
+  await createTableSachets();
+  await createUsers();
+  await createFilesTable();
+  await addRefreshTokenColumn();
 }
 
 export { createTable };

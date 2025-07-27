@@ -1,7 +1,8 @@
 import { Login, BDUser } from '../models/User'
-import db from '../db/dbUser'
+import dbUser from '../db/dbUser'
+
 async function getUser(login: Login): Promise<BDUser> {
-  const user = await db.getUser(login)
+  const user = await dbUser.getUser(login)
   if (user instanceof Error) {
     throw user
   }
@@ -11,4 +12,8 @@ async function getUser(login: Login): Promise<BDUser> {
   return user
 }
 
-export default { getUser }
+async function saveRefreshToken(login: Login, refreshToken: string | null) {
+ return await dbUser.updateUserRefreshToken(login, refreshToken);
+}
+
+export default { getUser, saveRefreshToken }

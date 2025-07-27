@@ -2,8 +2,6 @@ import express from "express";
 import handlerLogin from '../handlers/handlerLogin'
 const router = express.Router();
 
-
-
 /**
  * @swagger
  * /login:
@@ -32,6 +30,31 @@ const router = express.Router();
  */
 router.post('/login', handlerLogin.login)
 
-
+/**
+ * @swagger
+ * /refresh:
+ *   post:
+ *     summary: refresh token
+ *     tags: [Login]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               refreshToken:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: successfully refreshed
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       403:
+ *         description: Invalid or expired refresh token
+ */
+router.post('/refresh', handlerLogin.refresh)
 
 export default router

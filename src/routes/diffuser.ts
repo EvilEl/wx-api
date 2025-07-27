@@ -1,9 +1,9 @@
 import express from "express";
 import handlerDiffuser from "../handlers/handlerDiffuser";
 import authenticateToken from '../middlewear/authenticateToken'
+import { ProductId } from "../models/Product";
 
 const router = express.Router();
-
 
 /**
  * @swagger
@@ -56,7 +56,7 @@ router.post("/diffuser", authenticateToken, handlerDiffuser.createDiffuser);
  *        404:
  *          description: The post was not found
  */
-router.delete("/removeDiffuser/:id", authenticateToken, handlerDiffuser.removeDiffuser);
+router.delete<{ id: ProductId }>("/removeDiffuser/:id", authenticateToken, handlerDiffuser.removeDiffuser);
 
 /**
  * @swagger

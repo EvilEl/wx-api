@@ -172,13 +172,16 @@ import swaggerJsdoc from 'swagger-jsdoc'
  *     User:
  *       type: object
  *       properties:
- *         userName:
+ *         login:
  *           type: string
- *         token:
+ *         accessToken:
+ *           type: string
+ *         refreshToken:
  *           type: string
  *       example:
- *         userName: 'admin'
- *         token: 'token'
+ *         login: 'admin'
+ *         accessToken: 'some.jwt.token'
+ *         refreshToken: 'another.jwt.token'
  *     Files:
  *       type: object
  *       required:

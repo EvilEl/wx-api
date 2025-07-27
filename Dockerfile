@@ -8,7 +8,7 @@ COPY package*.json ./
 
 
 # Установка зависимостей через pnpm
-RUN npm install
+RUN npm install -g pm2 && npm install
 
 # Весь остальной код копируем
 COPY . .
@@ -22,4 +22,4 @@ ENV JWT_REFRESH_SECRET_KEY = AAAREFRESHTESTKEY
 
 EXPOSE 3000
 # Запуск
-CMD ["npm", "run", "dev"]
+CMD npm run pm2:start && pm2 logs

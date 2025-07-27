@@ -5,7 +5,10 @@
   "scripts": {
     "build": "tsc",
     "start": "npm run build && node dist/index.js",
-    "dev": "nodemon --watch src --ext ts --exec \"tsc && node dist/index.js\"",
+    "pm2:start": "npm run build && pm2 start dist/index.js --watch --restart-delay=1000 --name base-tgwx",
+    "pm2:stop": "pm2 stop base-tgwx",
+    "pm2:restart": "pm2 restart base-tgwx",
+    "pm2:delete": "pm2 delete base-tgwx",
     "clear:db": "node",
     "lint:fix": "eslint --fix"
   },
@@ -34,7 +37,6 @@
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.15.3",
     "eslint": "^9.25.1",
-    "nodemon": "^3.1.9",
     "typescript-eslint": "^8.31.1"
   }
 }

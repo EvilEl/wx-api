@@ -3,159 +3,6 @@ import swaggerJsdoc from 'swagger-jsdoc'
  * @swagger
  * components:
  *   schemas:
- *     Candle:
- *       type: object
- *       required:
- *         - id
- *         - name
- *         - count
- *         - price
- *       properties:
- *           id:
- *            type: number
- *           name:
- *            type: string
- *           count:
- *            type: number
- *           price:
- *            type: number
- *       example:
- *           id:   1
- *           name: 'Candle'
- *           count: 20
- *           price: 20
- *     CandleCreate:
- *       type: object
- *       required:
- *         - name
- *         - count
- *         - price
- *       properties:
- *         name:
- *           type: string
- *         count:
- *           type: number
- *         price:
- *           type: number
- *       example:
- *         name: 'Candle'
- *         count: 5
- *         price: 100
- *     CandleUpdate:
- *       type: object
- *       properties:
- *         name:
- *           type: string
- *         count:
- *           type: number
- *         price:
- *           type: number
- *       example:
- *         name: 'Candle'
- *         count: 5
- *         price: 100
- *     Diffuser:
- *       type: object
- *       required:
- *         - id
- *         - name
- *         - count
- *         - price
- *       properties:
- *           id:
- *            type: number
- *           name:
- *            type: string
- *           count:
- *            type: number
- *           price:
- *            type: number
- *       example:
- *           id:   1
- *           name: 'Diffuser'
- *           count: 20
- *           price: 20
-*     DiffuserCreate:
- *       type: object
- *       required:
- *         - name
- *         - count
- *         - price
- *       properties:
- *         name:
- *           type: string
- *         count:
- *           type: number
- *         price:
- *           type: number
- *       example:
- *         name: 'Diffuser'
- *         count: 5
- *         price: 100
- *     DiffuserUpdate:
- *       type: object
- *       properties:
- *         name:
- *           type: string
- *         count:
- *           type: number
- *         price:
- *           type: number
- *       example:
- *         name: 'Diffuser'
- *         count: 5
- *         price: 100
- *     Sachet:
- *       type: object
- *       required:
- *         - id
- *         - name
- *         - count
- *         - price
- *       properties:
- *           id:
- *            type: number
- *           name:
- *            type: string
- *           count:
- *            type: number
- *           price:
- *            type: number
- *       example:
- *           id:   1
- *           name: 'Sachet'
- *           count: 20
- *           price: 20
-*     SachetCreate:
- *       type: object
- *       required:
- *         - name
- *         - count
- *         - price
- *       properties:
- *         name:
- *           type: string
- *         count:
- *           type: number
- *         price:
- *           type: number
- *       example:
- *         name: 'Sachet'
- *         count: 5
- *         price: 100
- *     SachetUpdate:
- *       type: object
- *       properties:
- *         name:
- *           type: string
- *         count:
- *           type: number
- *         price:
- *           type: number
- *       example:
- *         name: 'Sachet'
- *         count: 5
- *         price: 100
  *     LoginUser:
  *       type: object
  *       required:
@@ -256,6 +103,71 @@ import swaggerJsdoc from 'swagger-jsdoc'
  *           link: 'dasdasas'
  *           base64: 'dasdasdasdasd'
  *           idProduct: 1
+ *     Product:
+ *       type: object
+ *       required:
+ *         - id
+ *         - name
+ *         - type
+ *         - count
+ *         - price
+ *       properties:
+ *           id:
+ *            type: number
+ *           name:
+ *            type: string
+ *           type:
+ *            type: string
+ *            enum: [candle, diffuser, sachet]
+ *           count:
+ *            type: number
+ *           price:
+ *            type: number
+ *       example:
+ *           id: 1
+ *           name: 'Vanilla Candle'
+ *           type: 'candle'
+ *           count: 20
+ *           price: 250
+ *     ProductCreate:
+ *       type: object
+ *       required:
+ *         - name
+ *         - type
+ *         - count
+ *         - price
+ *       properties:
+ *         name:
+ *           type: string
+ *         type:
+ *           type: string
+ *           enum: [candle, diffuser, sachet]
+ *         count:
+ *           type: number
+ *         price:
+ *           type: number
+ *       example:
+ *         name: 'Lavender Sachet'
+ *         type: 'sachet'
+ *         count: 15
+ *         price: 120
+ *     ProductUpdate:
+ *       type: object
+ *       properties:
+ *         name:
+ *           type: string
+ *         type:
+ *           type: string
+ *           enum: [candle, diffuser, sachet]
+ *         count:
+ *           type: number
+ *         price:
+ *           type: number
+ *       example:
+ *         name: 'Rose Diffuser'
+ *         type: 'diffuser'
+ *         count: 8
+ *         price: 350
  */
 
 const options = {

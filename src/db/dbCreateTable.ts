@@ -2,30 +2,14 @@ import { run, get } from "./db";
 import bcrypt from 'bcrypt'
 import { addRefreshTokenColumn } from "./migration";
 
-async function createTableCandles() {
-  run(`CREATE TABLE IF NOT EXISTS candles (
+async function createTableProducts() {
+  run(`CREATE TABLE IF NOT EXISTS products (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT UNIQUE,
+    name TEXT NOT NULL,
+    type TEXT NOT NULL CHECK (type IN ('candle', 'diffuser', 'sachet')),
     price INTEGER NOT NULL,
-    count INTEGER NOT NULL
-  )`);
-}
-
-async function createTableDiffusers() {
-  run(`CREATE TABLE IF NOT EXISTS diffusers(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT UNIQUE,
-    price INTEGER NOT NULL,
-    count INTEGER NOT NULL
-    )`);
-}
-
-async function createTableSachets() {
-  run(`CREATE TABLE IF NOT EXISTS sachets (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT UNIQUE,
-    price INTEGER NOT NULL,
-    count INTEGER NOT NULL
+    count INTEGER NOT NULL,
+    UNIQUE(name, type)
   )`);
 }
 
@@ -62,9 +46,7 @@ async function createFilesTable() {
 
 
 async function createTable() {
-  await createTableCandles();
-  await createTableDiffusers();
-  await createTableSachets();
+  await createTableProducts();
   await createUsers();
   await createFilesTable();
   await addRefreshTokenColumn();

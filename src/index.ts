@@ -5,9 +5,7 @@ import cors from 'cors'
 import swaggerUi from 'swagger-ui-express'
 import { init } from "./db/db";
 import { createTable } from "./db/dbCreateTable";
-import routerSachet from "./routes/sachet";
-import routerDiffuser from "./routes/diffuser";
-import routerCandle from "./routes/candle";
+import routerProducts from "./routes/products";
 import routerLogin from './routes/login'
 import routerFiles from './routes/files'
 import openapiSpecification from './swagger'
@@ -20,9 +18,7 @@ initializeDirectories(['uploads','products'])
 app.use(cors()) // ✅ разрешает все источники
 app.use(morgan('dev')); // простой логгер
 app.use(express.json({ limit: '10mb' })); // Middleware для парсинга JSON
-app.use(routerSachet);
-app.use(routerDiffuser);
-app.use(routerCandle);
+app.use(routerProducts);
 app.use(routerLogin)
 app.use(routerFiles)
 app.use('/api-docs-tw', swaggerUi.serve, swaggerUi.setup(openapiSpecification));

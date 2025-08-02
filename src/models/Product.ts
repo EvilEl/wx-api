@@ -1,6 +1,9 @@
+export type ProductType = 'candle' | 'diffuser' | 'sachet';
+
 export interface IProduct {
   id: string;
   name: string;
+  type: ProductType;
   count: number;
   price: number;
 }

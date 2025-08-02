@@ -3,22 +3,22 @@ import {
   ProductId,
   ProductWithoutId,
   PartialProductWithoutId,
+  ProductType,
 } from "../models/Product";
-import serviceCandle from "../service/serviceCandle";
+import serviceProduct from "../service/serviceProduct";
 import { Request, Response } from 'express';
 
-
-async function createCandle(
+async function createProduct(
   req: Request<object, object, ProductWithoutId>,
   res: Response
 ) {
   try {
-    const { name, count, price } = req.body;
-    if (!name || !count || !price) {
-      res.status(HttpStatus.BAD_REQUEST).json('Не заполенны поля')
+    const { name, type, count, price } = req.body;
+    if (!name || !type || !count || !price) {
+      res.status(HttpStatus.BAD_REQUEST).json('Не заполнены поля')
       return
     }
-    await serviceCandle.createCandle({ name, count, price });
+    await serviceProduct.createProduct({ name, type, count, price });
     res.status(HttpStatus.CREATED).send('Успех');
   } catch (err) {
     if (err instanceof Error) {
@@ -32,11 +32,12 @@ async function createCandle(
     res.status(HttpStatus.INTERNAL_SERVER_ERROR).json('Неизвестная ошибка');
     return
   }
-};
-async function removeCandle(req: Request<{ id: ProductId }>, res: Response) {
+}
+
+async function removeProduct(req: Request<{ id: ProductId }>, res: Response) {
   const { id } = req.params;
   try {
-    await serviceCandle.removeCandle(id);
+    await serviceProduct.removeProduct(id);
     res.status(200).json();
   } catch (err) {
     if (err instanceof Error) {
@@ -45,14 +46,14 @@ async function removeCandle(req: Request<{ id: ProductId }>, res: Response) {
   }
 }
 
-async function updateCandle(
+async function updateProduct(
   req: Request<{ id: ProductId }, object, Partial<PartialProductWithoutId>>,
   res: Response
 ) {
   const { id } = req.params;
   const body = req.body;
   try {
-    await serviceCandle.updateCandle(id, body);
+    await serviceProduct.updateProduct(id, body);
     res.status(200).json();
   } catch (err) {
     if (err instanceof Error) {
@@ -61,9 +62,9 @@ async function updateCandle(
   }
 }
 
-async function getCandles(req: Request, res: Response) {
+async function getAllProducts(req: Request, res: Response) {
   try {
-    const data = await serviceCandle.getCandles();
+    const data = await serviceProduct.getAllProducts();
     res.status(200).json(data);
   } catch (err) {
     if (err instanceof Error) {
@@ -72,11 +73,22 @@ async function getCandles(req: Request, res: Response) {
   }
 }
 
+async function getProductsByType(req: Request<{ type: ProductType }>, res: Response) {
+  try {
+    const { type } = req.params;
+    const data = await serviceProduct.getProductsByType(type);
+    res.status(200).json(data);
+  } catch (err) {
+    if (err instanceof Error) {
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: err.message });
+    }
+  }
+}
 
-async function getCandle(req: Request<{ id: ProductId }>, res: Response) {
+async function getProduct(req: Request<{ id: ProductId }>, res: Response) {
   try {
     const { id } = req.params
-    const data = await serviceCandle.getCandle(id);
+    const data = await serviceProduct.getProduct(id);
     res.status(200).json(data);
   } catch (err) {
     if (err instanceof Error) {
@@ -85,5 +97,11 @@ async function getCandle(req: Request<{ id: ProductId }>, res: Response) {
   }
 }
 
-
-export default { createCandle, removeCandle, updateCandle, getCandles, getCandle };
+export default { 
+  createProduct, 
+  removeProduct, 
+  updateProduct, 
+  getAllProducts, 
+  getProductsByType,
+  getProduct 
+};

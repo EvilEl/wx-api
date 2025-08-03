@@ -6,7 +6,11 @@ import {
   ProductType,
 } from "../models/Product";
 import serviceProduct from "../service/serviceProduct";
+import serviceFiles from "../service/serviceFiles";
 import { Request, Response } from 'express';
+import { File, FileIdProduct } from "../models/File";
+import fs from 'fs';
+import path from 'path';
 
 async function createProduct(
   req: Request<object, object, ProductWithoutId>,
@@ -18,6 +22,7 @@ async function createProduct(
       res.status(HttpStatus.BAD_REQUEST).json('Не заполнены поля')
       return
     }
+    //TODO при создание  возращать id нового продукта
     await serviceProduct.createProduct({ name, type, count, price });
     res.status(HttpStatus.CREATED).send('Успех');
   } catch (err) {
@@ -97,11 +102,87 @@ async function getProduct(req: Request<{ id: ProductId }>, res: Response) {
   }
 }
 
+async function uploadFileToProduct(
+  req: Request<{ id: string }, object, File>,
+  res: Response
+) {
+  try {
+    const { id } = req.params;
+    const { filename, originalname, mimeType, size, base64 } = req.body;
+    
+    if (!filename || !mimeType || !size || !base64) {
+      res.status(HttpStatus.BAD_REQUEST).json('Не заполнены поля');
+      return;
+    }
+    
+    // Генерируем уникальное имя файла
+    const uniqueFilename = `${Date.now()}_${filename}`;
+    const filePath = `uploads/products/${uniqueFilename}`;
+    const fullPath = path.join(__dirname, '../', filePath);
+    
+    // Сохраняем файл на диск
+    const base64Data = base64.replace(/^data:image\/\w+;base64,/, '');
+    fs.writeFileSync(fullPath, base64Data, 'base64');
+    
+    // Создаем запись в БД с путем к файлу
+    const fileData = {
+      filename: uniqueFilename,
+      originalname,
+      mimeType,
+      size,
+      link: `/uploads/products/${uniqueFilename}`,
+      base64: null, // Не сохраняем base64 в БД
+      idProduct: parseInt(id),
+      visible:true
+    } ; 
+    
+    await serviceFiles.createFile(fileData);
+    res.status(HttpStatus.CREATED).json({
+      message: 'Файл загружен успешно',
+      url: `/uploads/products/${uniqueFilename}`
+    });
+  } catch (err) {
+    if (err instanceof Error) {
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+        message: err.message
+      });
+      return
+    }
+  }
+}
+
+async function getProductFiles(req: Request<{ id: FileIdProduct }>, res: Response) {
+  try {
+    const { id } = req.params;
+    const data = await serviceFiles.getAllFilesForIdProduct(id);
+    res.status(200).json(data);
+  } catch (err) {
+    if (err instanceof Error) {
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: err.message });
+    }
+  }
+}
+
+async function deleteProductFiles(req: Request<{ id: FileIdProduct }>, res: Response) {
+  try {
+    const { id } = req.params;
+    await serviceFiles.removeFilesIdProduct(id);
+    res.status(200).json('Файлы удалены успешно');
+  } catch (err) {
+    if (err instanceof Error) {
+      res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: err.message });
+    }
+  }
+}
+
 export default { 
   createProduct, 
   removeProduct, 
   updateProduct, 
   getAllProducts, 
   getProductsByType,
-  getProduct 
+  getProduct,
+  uploadFileToProduct,
+  getProductFiles,
+  deleteProductFiles
 };

@@ -40,7 +40,8 @@ async function createFilesTable() {
     link TEXT DEFAULT NULL,
     base64 TEXT DEFAULT NULL,
     createdDate DATETIME DEFAULT CURRENT_TIMESTAMP,
-    idProduct INTEGER DEFAULT NULL
+    idProduct INTEGER DEFAULT NULL,
+    visible INTEGER DEFAULT 1
   )`);
 }
 

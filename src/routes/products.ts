@@ -159,4 +159,83 @@ router.get("/products/type/:type", handlerProduct.getProductsByType);
  */
 router.get('/products/:id', handlerProduct.getProduct)
 
+/**
+ * @swagger
+ * /products/{id}/files:
+ *   post:
+ *     summary: Upload file to product
+ *     security:
+ *      - bearerAuth: []
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: product id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/FilesCreate'
+ *     responses:
+ *       200:
+ *         description: File uploaded successfully
+ *       400:
+ *         description: Invalid input
+ *       500:
+ *         description: Server error
+ */
+router.post("/products/:id/files", authenticateToken, handlerProduct.uploadFileToProduct);
+
+/**
+ * @swagger
+ * /products/{id}/files:
+ *   get:
+ *     summary: Get all files for product
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: product id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: List of files for product
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Files'
+ */
+router.get('/products/:id/files', handlerProduct.getProductFiles)
+
+/**
+ * @swagger
+ * /products/{id}/files:
+ *   delete:
+ *     summary: Delete all files for product
+ *     security:
+ *      - bearerAuth: []
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         description: product id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Files deleted successfully
+ *       500:
+ *         description: Server error
+ */
+router.delete("/products/:id/files", authenticateToken, handlerProduct.deleteProductFiles);
+
 export default router;

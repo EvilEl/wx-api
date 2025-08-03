@@ -1,6 +1,7 @@
 import { run, all, get } from "./db";
 import { File, FileId, FileIdProduct } from '../models/File'
 
+//TODO UPDATE FILE
 async function saveFile(fileData: File) {
   return run(
     `INSERT INTO files (
@@ -33,8 +34,9 @@ async function createFile(file: File) {
       link,
       base64,
       idProduct,
-      createdDate
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      createdDate,
+      visible
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     file.filename,
     file.originalname,
     file.mimeType,
@@ -42,7 +44,8 @@ async function createFile(file: File) {
     file.link,
     file.base64,
     file.idProduct,
-    new Date().toISOString()
+    new Date().toISOString(),
+    file.visible
   );
 }
 

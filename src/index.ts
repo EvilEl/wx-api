@@ -8,6 +8,7 @@ import { createTable } from "./db/dbCreateTable";
 import routerProducts from "./routes/products";
 import routerLogin from './routes/login'
 import routerFiles from './routes/files'
+import routerUploads from './routes/uploads'
 import openapiSpecification from './swagger'
 import { initializeDirectories } from "./service/serviceFileSystem";
 
@@ -21,6 +22,7 @@ app.use(express.json({ limit: '10mb' })); // Middleware для парсинга 
 app.use(routerProducts);
 app.use(routerLogin)
 app.use(routerFiles)
+app.use(routerUploads)
 app.use('/api-docs-tw', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 
 

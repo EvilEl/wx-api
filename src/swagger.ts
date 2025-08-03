@@ -123,12 +123,29 @@ import swaggerJsdoc from 'swagger-jsdoc'
  *            type: number
  *           price:
  *            type: number
+ *           files:
+ *            type: array
+ *            items:
+ *              $ref: '#/components/schemas/Files'
  *       example:
  *           id: 1
  *           name: 'Vanilla Candle'
  *           type: 'candle'
  *           count: 20
  *           price: 250
+ *           files: [
+ *             {
+ *               id: 1,
+ *               filename: '1735834567123_candle1.jpg',
+ *               originalname: 'vanilla-candle.jpg',
+ *               mimeType: 'image/jpeg',
+ *               size: 125000,
+ *               link: '/uploads/products/1735834567123_candle1.jpg',
+ *               base64: null,
+ *               createdDate: '2025-04-28 21:37:20',
+ *               idProduct: 1
+ *             }
+ *           ]
  *     ProductCreate:
  *       type: object
  *       required:

@@ -4,11 +4,10 @@ interface File {
   mimeType: string;
   size: number;
   link: string;
-  base64: string;
+  base64: string | null;
   idProduct: number;
+  visible:boolean;
 }
-
-
 interface FileBase extends File {
   id: number
 }

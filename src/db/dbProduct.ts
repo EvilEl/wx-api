@@ -31,20 +31,49 @@ async function updateProduct(id: ProductId, data: PartialProductWithoutId) {
 }
 
 async function getAllProducts() {
-  return all(`
+  const products: any = await all(`
     SELECT * FROM products
     `);
+  
+  // Получаем файлы для каждого продукта
+  for (const product of products) {
+    const files = await all(`
+      SELECT * FROM files WHERE idProduct = ?
+    `, product.id);
+    product.files = files;
+  }
+  
+  return products;
 }
 
 async function getProductsByType(type: ProductType) {
-  return all(`
+  const products: any = await all(`
     SELECT * FROM products WHERE type = ?
     `, type);
+    
+  // Получаем файлы для каждого продукта
+  for (const product of products) {
+    const files = await all(`
+      SELECT * FROM files WHERE idProduct = ?
+    `, product.id);
+    product.files = files;
+  }
+  
+  return products;
 }
 
 async function getProduct(id: ProductId) {
-  const sql = 'SELECT * FROM products WHERE id = ?';
-  return get(sql, id);
+  const product: any = await get('SELECT * FROM products WHERE id = ?', id);
+  
+  if (product) {
+    // Получаем файлы для продукта
+    const files = await all(`
+      SELECT * FROM files WHERE idProduct = ?
+    `, product.id);
+    product.files = files;
+  }
+  
+  return product;
 }
 
 export default { 

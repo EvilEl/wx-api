@@ -22,9 +22,13 @@ async function createProduct(
       res.status(HttpStatus.BAD_REQUEST).json('Не заполнены поля')
       return
     }
-    //TODO при создание  возращать id нового продукта
-    await serviceProduct.createProduct({ name, type, count, price });
-    res.status(HttpStatus.CREATED).send('Успех');
+    const id = await serviceProduct.createProduct({ name, type, count, price });
+    if(id instanceof Error){
+      res.status(HttpStatus.BAD_REQUEST).send(id)
+      return
+    }
+    console.log('Создали продукт с id',id)
+    res.status(HttpStatus.CREATED).send({id:id.lastID});
   } catch (err) {
     if (err instanceof Error) {
       if (err.message.includes("UNIQUE")) {

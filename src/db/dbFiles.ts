@@ -1,5 +1,5 @@
 import { run, all, get } from "./db";
-import { File, FileId, FileIdProduct } from '../models/File'
+import { File, FileId, FileIdProduct, RemoveFileFromProduct } from '../models/File'
 
 //TODO UPDATE FILE
 async function saveFile(fileData: File) {
@@ -65,6 +65,10 @@ async function deleteFile(id: FileId) {
   return run(`DELETE FROM files WHERE id = ?`, id);
 }
 
+async function removeFileFromProduct(data:RemoveFileFromProduct){
+  return run('DELETE FROM files WHERE id = ? AND idProduct = ?',data.idFile,data.idProduct)
+}
+
 async function deleteFilesIdProduct(id: FileIdProduct) {
   return run(`DELETE FROM files WHERE idProduct = ?`, id);
 }
@@ -77,5 +81,6 @@ export default {
   getAllFiles,
   deleteFile,
   getAllFilesForIdProduct,
-  deleteFilesIdProduct
+  deleteFilesIdProduct,
+  removeFileFromProduct
 };

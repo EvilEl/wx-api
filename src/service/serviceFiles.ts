@@ -1,5 +1,5 @@
 import db from "../db/dbFiles";
-import { File, FileId, FileIdProduct } from "../models/File";
+import { File, FileId, FileIdProduct, RemoveFileFromProduct } from "../models/File";
 
 async function createFile(file: File) {
   return db.createFile(file);
@@ -13,6 +13,10 @@ async function removeFilesIdProduct(id: FileIdProduct) {
   return db.deleteFilesIdProduct(id);
 }
 
+async function removeFileFromProduct(data:RemoveFileFromProduct) {
+  return db.removeFileFromProduct(data);
+}
+
 async function getAllFilesForIdProduct(id: FileIdProduct) {
   return db.getAllFilesForIdProduct(id)
 }
@@ -20,4 +24,4 @@ async function getAllFilesForIdProduct(id: FileIdProduct) {
 
 
 
-export default { createFile, removeFile, removeFilesIdProduct, getAllFilesForIdProduct };
+export default { createFile, removeFile, removeFilesIdProduct,removeFileFromProduct, getAllFilesForIdProduct };

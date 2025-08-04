@@ -2,7 +2,8 @@ import { HttpStatus } from "../enums/http-status";
 import serviceFiles from "../service/serviceFiles";
 import { Request, Response } from 'express';
 import {
-  File, FileId, FileIdProduct
+  File, FileId, FileIdProduct,
+  RemoveFileFromProduct
 } from "../models/File";
 
 async function createFile(
@@ -44,6 +45,17 @@ async function removeFile(req: Request<{ id: FileId }>, res: Response) {
   }
 }
 
+async function removeFileFromProduct(req: Request<RemoveFileFromProduct>, res: Response) {
+  const { idFile,idProduct } = req.params;
+  try {
+    await serviceFiles.removeFileFromProduct({idFile,idProduct});
+    res.status(200).json();
+  } catch (err) {
+    if (err instanceof Error) {
+      res.json({ message: err.message });
+    }
+  }
+}
 
 async function removeFilesIdProduct(req: Request<{ id: FileIdProduct }>, res: Response) {
   const { id } = req.params;
@@ -69,4 +81,4 @@ async function getAllFilesForIdProduct(req: Request<{ id: FileIdProduct }>, res:
   }
 }
 
-export default { createFile, removeFile, removeFilesIdProduct, getAllFilesForIdProduct };
+export default { createFile, removeFile, removeFilesIdProduct,removeFileFromProduct, getAllFilesForIdProduct };

@@ -15,4 +15,9 @@ interface FileBase extends File {
 type FileId = Pick<FileBase, "id">;
 type FileIdProduct = Pick<FileBase, "idProduct">;
 
-export { File, FileId, FileBase, FileIdProduct }
+interface RemoveFileFromProduct {
+   idFile:FileId,
+   idProduct: FileIdProduct 
+}
+
+export { File, FileId, FileBase, FileIdProduct, RemoveFileFromProduct }

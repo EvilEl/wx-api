@@ -66,6 +66,7 @@ async function deleteFile(id: FileId) {
 }
 
 async function removeFileFromProduct(data:RemoveFileFromProduct){
+  console.log('data.idFile,data.idProduct',data.idFile,data.idProduct)
   return run('DELETE FROM files WHERE id = ? AND idProduct = ?',data.idFile,data.idProduct)
 }
 

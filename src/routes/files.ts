@@ -59,6 +59,37 @@ router.delete("/files/product/:id", authenticateToken, handlerFiles.removeFilesI
 
 /**
  * @swagger
+ *  /files/product/{idFile}/{idProduct}:
+ *    delete:
+ *      summary: Remove specific file from product
+ *      security:
+ *       - bearerAuth: []
+ *      tags: [Files]
+ *      parameters:
+ *        - in: path
+ *          name: idFile
+ *          description: file id
+ *          required: true
+ *          schema:
+ *            type: integer
+ *        - in: path
+ *          name: idProduct
+ *          description: product id
+ *          required: true
+ *          schema:
+ *            type: integer
+ *      responses:
+ *        200:
+ *          description: The file was successfully removed from product
+ *        404:
+ *          description: The file or product was not found
+ *        500:
+ *          description: Server error
+ */
+router.delete("/files/product/:idFile/:idProduct", authenticateToken, handlerFiles.removeFileFromProduct);
+
+ /**
+ * @swagger
  *  /files/{id}:
  *    delete:
  *      summary: Removes a files by id

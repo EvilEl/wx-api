@@ -6,6 +6,7 @@ import swaggerUi from 'swagger-ui-express'
 import { init } from "./db/db";
 import { createTable } from "./db/dbCreateTable";
 import routerProducts from "./routes/products";
+import routerCategory from './routes/category'
 import routerLogin from './routes/login'
 import routerFiles from './routes/files'
 import routerUploads from './routes/uploads'
@@ -20,6 +21,7 @@ app.use(cors()) // ✅ разрешает все источники
 app.use(morgan('dev')); // простой логгер
 app.use(express.json({ limit: '10mb' })); // Middleware для парсинга JSON
 app.use(routerProducts);
+app.use(routerCategory);
 app.use(routerLogin)
 app.use(routerFiles)
 app.use(routerUploads)

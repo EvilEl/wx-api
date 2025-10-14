@@ -6,10 +6,20 @@ async function createTableProducts() {
   run(`CREATE TABLE IF NOT EXISTS products (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
-    type TEXT NOT NULL CHECK (type IN ('candle', 'diffuser', 'sachet')),
+    categoryId INTEGER NOT NULL,
     price INTEGER NOT NULL,
     count INTEGER NOT NULL,
-    UNIQUE(name, type)
+    FOREIGN KEY (categoryId) REFERENCES categories(id) ON DELETE RESTRICT,
+    UNIQUE(name)
+  )`);
+}
+
+async function createTableCategories() {
+  run(`CREATE TABLE IF NOT EXISTS categories (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    description TEXT NOT NULL,
+    UNIQUE(name)
   )`);
 }
 
@@ -47,6 +57,7 @@ async function createFilesTable() {
 
 
 async function createTable() {
+  await createTableCategories();
   await createTableProducts();
   await createUsers();
   await createFilesTable();

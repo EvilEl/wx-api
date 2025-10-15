@@ -3,7 +3,6 @@ import {
   ProductId,
   ProductWithoutId,
   PartialProductWithoutId,
-  ProductType,
 } from "../models/Product";
 import serviceProduct from "../service/serviceProduct";
 import serviceFiles from "../service/serviceFiles";
@@ -11,18 +10,19 @@ import { Request, Response } from 'express';
 import { File, FileIdProduct } from "../models/File";
 import fs from 'fs';
 import path from 'path';
+import { CategoryId } from "../models/Category";
 
 async function createProduct(
   req: Request<object, object, ProductWithoutId>,
   res: Response
 ) {
   try {
-    const { name, type, count, price } = req.body;
-    if (!name || !type || !count || !price) {
+    const { name, categoryId, count, price } = req.body;
+    if (!name || !categoryId || !count || !price) {
       res.status(HttpStatus.BAD_REQUEST).json('Не заполнены поля')
       return
     }
-    const id = await serviceProduct.createProduct({ name, type, count, price });
+    const id = await serviceProduct.createProduct({ name, categoryId, count, price });
     if(id instanceof Error){
       res.status(HttpStatus.BAD_REQUEST).send(id)
       return
@@ -82,10 +82,10 @@ async function getAllProducts(req: Request, res: Response) {
   }
 }
 
-async function getProductsByType(req: Request<{ type: ProductType }>, res: Response) {
+async function getProductsByType(req: Request<{ categoryId:CategoryId }>, res: Response) {
   try {
-    const { type } = req.params;
-    const data = await serviceProduct.getProductsByType(type);
+    const { categoryId } = req.params;
+    const data = await serviceProduct.getProductsByType(categoryId);
     res.status(200).json(data);
   } catch (err) {
     if (err instanceof Error) {

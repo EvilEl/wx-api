@@ -116,12 +116,12 @@ router.get("/products", handlerProduct.getAllProducts);
  *      tags: [Products]
  *      parameters:
  *        - in: path
- *          name: type
- *          description: product type (candle, diffuser, sachet)
+ *          name: categoryId
+ *          description: product type ()
  *          required: true
  *          schema:
- *            type: string
- *            enum: [candle, diffuser, sachet]
+ *            categoryId: string
+ *            enum: []
  *      responses:
  *       200:
  *        description: the list of products by type
@@ -132,7 +132,7 @@ router.get("/products", handlerProduct.getAllProducts);
  *            items:
  *              $ref: '#/components/schemas/Product'
  */
-router.get("/products/type/:type", handlerProduct.getProductsByType);
+router.get("/products/type/:categoryId", handlerProduct.getProductsByType);
 
 /**
  * @swagger

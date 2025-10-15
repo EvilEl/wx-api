@@ -1,4 +1,5 @@
-import { PartialProductWithoutId, ProductId, ProductType } from "../models/Product";
+import { CategoryId } from "../models/Category";
+import { PartialProductWithoutId, ProductId } from "../models/Product";
 import { createUpdateParams } from "../utils/formattedUpdateParams";
 import { run, all, get } from "./db";
 
@@ -6,7 +7,7 @@ async function createProduct(...params: unknown[]) {
   return run(
     `INSERT INTO products (
     name,
-    type,
+    categoryId,
     count,
     price
     )
@@ -46,10 +47,10 @@ async function getAllProducts() {
   return products;
 }
 
-async function getProductsByType(type: ProductType) {
+async function getProductsByType(categoryId: CategoryId) {
   const products: any = await all(`
-    SELECT * FROM products WHERE type = ?
-    `, type);
+    SELECT * FROM products WHERE categoryId = ?
+    `, categoryId);
     
   // Получаем файлы для каждого продукта
   for (const product of products) {

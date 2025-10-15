@@ -1,9 +1,11 @@
+import { CategoryId } from "./Category";
+
 export type ProductType = 'candle' | 'diffuser' | 'sachet';
 
 export interface IProduct {
   id: string;
   name: string;
-  type: ProductType;
+  categoryId: CategoryId;
   count: number;
   price: number;
 }

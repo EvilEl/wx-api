@@ -1,13 +1,13 @@
 import dbProduct from "../db/dbProduct";
+import { CategoryId } from "../models/Category";
 import {
   ProductWithoutId,
   ProductId,
   PartialProductWithoutId,
-  ProductType,
 } from "../models/Product";
 
-async function createProduct({ name, type, count, price }: ProductWithoutId) {
-  return dbProduct.createProduct(name, type, count, price);
+async function createProduct({ name, categoryId, count, price }: ProductWithoutId) {
+  return dbProduct.createProduct(name, categoryId, count, price);
 }
 
 async function removeProduct(id: ProductId) {
@@ -25,8 +25,8 @@ async function getAllProducts() {
   return dbProduct.getAllProducts();
 }
 
-async function getProductsByType(type: ProductType) {
-  return dbProduct.getProductsByType(type);
+async function getProductsByType(categoryId: CategoryId) {
+  return dbProduct.getProductsByType(categoryId);
 }
 
 async function getProduct(id: ProductId) {

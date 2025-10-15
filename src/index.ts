@@ -28,8 +28,20 @@ app.use(routerUploads)
 app.use('/api-docs-tw', swaggerUi.serve, swaggerUi.setup(openapiSpecification));
 
 
-app.listen(process.env.PORT, async () => {
-  await init("./database.db");
-  createTable();
-  console.log("Example app listening on port 3000!");
-});
+// Инициализация базы данных перед запуском сервера
+async function startServer() {
+  try {
+    await init("./database.db");
+    await createTable();
+    console.log("Database initialized successfully");
+    
+    app.listen(process.env.PORT, () => {
+      console.log(`Server listening on port ${process.env.PORT || 3000}!`);
+    });
+  } catch (error) {
+    console.error("Failed to initialize database:", error);
+    process.exit(1);
+  }
+}
+
+startServer();

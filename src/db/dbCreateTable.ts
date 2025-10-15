@@ -3,7 +3,7 @@ import bcrypt from 'bcrypt'
 import { addRefreshTokenColumn } from "./migration";
 
 async function createTableProducts() {
-  run(`CREATE TABLE IF NOT EXISTS products (
+  await run(`CREATE TABLE IF NOT EXISTS products (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     categoryId INTEGER NOT NULL,
@@ -15,7 +15,7 @@ async function createTableProducts() {
 }
 
 async function createTableCategories() {
-  run(`CREATE TABLE IF NOT EXISTS categories (
+  await run(`CREATE TABLE IF NOT EXISTS categories (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
     description TEXT NOT NULL,

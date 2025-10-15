@@ -14,12 +14,16 @@ RUN npm install -g pm2 && npm install
 COPY . .
 
 
-ENV PORT="3000"
-ENV PASSWORD="WaxSystem"
-ENV JWT_SECRET_KEY = AAATESTKEY
-ENV JWT_REFRESH_SECRET_KEY = AAAREFRESHTESTKEY
+# Переменные окружения
+ENV PORT=3000
+ENV PASSWORD=WaxSystem
+ENV JWT_SECRET_KEY=AAATESTKEY
+ENV JWT_REFRESH_SECRET_KEY=AAAREFRESHTESTKEY
 
+# Создание необходимых директорий
+RUN mkdir -p uploads logs
 
 EXPOSE 3000
-# Запуск
-CMD npm run pm2:start && pm2 logs
+
+# Запуск через PM2
+CMD ["npm", "run", "pm2:start"]

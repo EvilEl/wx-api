@@ -1,16 +1,16 @@
-import { Category, CategoryId, PartialCategoryWithoutId } from "../models/Category";
+import { CategoryId, PartialCategoryWithoutId } from "../models/Category";
 import { createUpdateParams } from "../utils/formattedUpdateParams";
 import { run, all } from "./db";
 
-function createCategory(...params:unknown[]) {
-  return run(
+async function createCategory(...params:unknown[]) {
+  return await run(
     `INSERT INTO categories (name, description) VALUES (?, ?)`,
     ...params
   );
 }
 
 async function updateCategory(id: CategoryId, data: PartialCategoryWithoutId) {
-  return run(`
+  return await run(`
       UPDATE categories
       SET ${createUpdateParams(data)}
       WHERE id = ?
@@ -18,15 +18,11 @@ async function updateCategory(id: CategoryId, data: PartialCategoryWithoutId) {
 }
 
 async function getAllCategories() {
-  const categories: Category[] | Error = await all(`
-    SELECT * FROM categories
-    `);
-  
-  return categories;
+  return await all(`SELECT * FROM categories`);
 }
 
 async function removeCategory(id: CategoryId) {
-  return run(`DELETE FROM categories
+  return await run(`DELETE FROM categories
       WHERE id = ?
     `, id);
 }

@@ -55,9 +55,22 @@ async function createFilesTable() {
   )`);
 }
 
+async function createDefaultCategories() {
+  const allCategoryExists = await get("SELECT * FROM categories WHERE name = ?", 'Все');
+  
+  if (!allCategoryExists) {
+    await run(
+      `INSERT INTO categories (name, description) VALUES (?, ?)`,
+      'Все',
+      'Все товары'
+    );
+    console.log('Default "Все" category created');
+  }
+}
 
 async function createTable() {
   await createTableCategories();
+  await createDefaultCategories()
   await createTableProducts();
   await createUsers();
   await createFilesTable();
